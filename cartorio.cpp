@@ -3,21 +3,23 @@
 #include <locale.h> //biblioteca de alocações de texto por região
 #include <string.h> // biblioteca responsável por cuidar das string
 
-int registro()
+int registro() // Função responsável por cadastrar os usuários no sistema
 {
+	// Início de criação de variáveis/strign
 	char arquivo[40];
     char cpf[40];
     char nome[40];
     char sobrenome[40];
     char cargo[40];
+    // Final da criação de variáveis/strign
     
-    printf("Digite o cpf a ser cadastrado: ");
-    scanf("%s", cpf);
+    printf("Digite o cpf a ser cadastrado: "); // Coletando informação do usuário
+    scanf("%s", cpf); // %s refere-se a string
     
     strcpy(arquivo,cpf); //Responsável por copiar os valores das string
 	    
     FILE *file; // Cria o arquivo
-    file = fopen (arquivo, "w"); // Cria o arquivo
+    file = fopen (arquivo, "w"); // Cria o arquivo e o "w" significa escrever
     fprintf(file,cpf); // Salvo o valor da variável
     fclose(file); // Fecha o arquivo
     
@@ -90,8 +92,24 @@ int consulta()
 
 int deletar()
 {
-	printf("Você escolheu deletar nomes!\n");
-	system("pause");
+    char cpf[40];
+    
+    printf("Digite o CPF do usuário a ser deletado: ");
+    scanf("%s",cpf);
+    
+    remove(cpf);
+    
+    FILE *file;
+    file = fopen(cpf,"r");
+    
+    if(file == NULL)
+    {
+    	printf("O usuário não se encontra no sistema!. \n");
+    	system("pause");
+	}
+    
+    
+ 
 }
 
 
@@ -117,12 +135,12 @@ int main()
 	
 	    scanf("%d", &opcao); //Armazenando as informações ( Escolha do usuário )
 	
-	    system("cls");
+	    system("cls"); // Responsável por limpar a tela
 	 
-	    switch(opcao) //Início da seleção
+	    switch(opcao) //Início da seleção do menu
 	    {
 	        case 1:
-	        registro();
+	        registro(); // chamada de funçôes
             break;
 	 	
 	 	    case 2:
